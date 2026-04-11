@@ -33,7 +33,7 @@ public class UserService {
         log.info("L'Utente {} {} è stato salvato correttamente", newUser.getSurname(), newUser.getName());
     }
 
-    public User findById(Long userId) {
+    public User findById(long userId) {
         Optional<User> found = this.userRepository.findById(userId);
         if (found.isPresent()) {
             log.info("Risultato ricerca: ");

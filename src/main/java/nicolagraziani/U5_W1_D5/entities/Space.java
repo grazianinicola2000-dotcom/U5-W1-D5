@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "reservations")
 public class Space {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
