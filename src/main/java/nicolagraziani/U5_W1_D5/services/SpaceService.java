@@ -2,6 +2,7 @@ package nicolagraziani.U5_W1_D5.services;
 
 import lombok.extern.slf4j.Slf4j;
 import nicolagraziani.U5_W1_D5.entities.Space;
+import nicolagraziani.U5_W1_D5.enums.SpaceType;
 import nicolagraziani.U5_W1_D5.exceptions.IdNotFoundException;
 import nicolagraziani.U5_W1_D5.repositories.SpaceRepository;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,9 @@ public class SpaceService {
 
     public List<Space> findAllSpacesAvailableByDate(LocalDate date) {
         return this.spaceRepository.findAllSpacesAvailableByDate(date);
+    }
+
+    public List<Space> findByCityAndType(String city, SpaceType type) {
+        return this.spaceRepository.findByCityAndType(city, type);
     }
 }

@@ -2,6 +2,8 @@ package nicolagraziani.U5_W1_D5.runners;
 
 import lombok.extern.slf4j.Slf4j;
 import nicolagraziani.U5_W1_D5.entities.Space;
+import nicolagraziani.U5_W1_D5.enums.SpaceType;
+import nicolagraziani.U5_W1_D5.exceptions.ReservationValidationException;
 import nicolagraziani.U5_W1_D5.services.BuildingService;
 import nicolagraziani.U5_W1_D5.services.ReservationService;
 import nicolagraziani.U5_W1_D5.services.SpaceService;
@@ -113,17 +115,23 @@ public class Runner implements CommandLineRunner {
 //        userService.saveNewUser(u4);
 //        userService.saveNewUser(u5);
 
-//        try {
-////            reservationService.registerNewReservation(userService.findById(1), spaceService.findById(1), LocalDate.of(2026, 04, 12));
-//
+//        SALVATAGGIO PRENOTAZIONI
+        try {
+            reservationService.registerNewReservation(userService.findById(1), spaceService.findById(1), LocalDate.of(2026, 04, 15));
 //            reservationService.registerNewReservation(userService.findById(2), spaceService.findById(2), LocalDate.of(2026, 04, 12));
 //            reservationService.registerNewReservation(userService.findById(3), spaceService.findById(3), LocalDate.of(2026, 04, 12));
 //            reservationService.registerNewReservation(userService.findById(4), spaceService.findById(4), LocalDate.of(2026, 04, 12));
-//        } catch (ReservationValidationException e) {
-//            log.warn("Impossibile aggiungere la prenotazione: {}", e.getMessage());
-//        }
-
+        } catch (ReservationValidationException e) {
+            log.warn("Impossibile aggiungere la prenotazione: {}", e.getMessage());
+        }
+//
+//      RICERCA DI TUTTI GLI SPAZI DISPONIBILI PER UNA DATA
         List<Space> spaces = spaceService.findAllSpacesAvailableByDate(LocalDate.of(2026, 04, 12));
         spaces.forEach(System.out::println);
+
+//        RICERCA DEGLI SPAZI PER CITTA E TIPO
+//        TODO: integrare con la ricerca degli spazi senza prenotazione
+        List<Space> spacesByCityAndType = spaceService.findByCityAndType("toRino", SpaceType.OPEN_SPACE);
+        spacesByCityAndType.forEach(System.out::println);
     }
 }
